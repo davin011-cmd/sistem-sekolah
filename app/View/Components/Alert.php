@@ -1,4 +1,5 @@
 <?php
+  
 
 namespace App\View\Components;
 
@@ -8,13 +9,13 @@ use Illuminate\View\Component;
 
 class Alert extends Component
 {
+    public string $type;
     /**
      * Create a new component instance.
      */
-    public string $type;
-    public function __construct(string $type = 'error')
+    public function __construct(string $type)
     {
-        $this->type = $type;
+        $this->type=$type;
     }
 
     /**
@@ -24,4 +25,4 @@ class Alert extends Component
     {
         return view('components.alert');
     }
-}
+} 

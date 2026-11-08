@@ -1,4 +1,5 @@
 <?php
+  
 
 namespace App\Http\Controllers\SchoolClass;
 
@@ -11,28 +12,28 @@ class IndexController extends Controller
      * Handle the incoming request.
      */
     public function __invoke(Request $request)
-    {   
+    {
         $title = 'Sistem Sekolah - Daftar Kelas';
-        $schoolclasses = [
+        $classes = [
             [
-            'id' => 1,
-            'name' => 'XII AKL 1',
-            'grade' => 'XII',
-            'major_id' => 'AKL',
-            'homeroom_teacher_id' => 'Budi Santoso'
-        ],
-        [
-            'id' => 2,
-            'name' => 'XII TKJ 1',
-            'grade' => 'XII',
-            'major_id' => 'TKJ',
-            'homeroom_teacher_id' => 'Siti Aminah'
-        ]
-
+                'id' => 1,
+                'name' => 'XII AKL 1',
+                'grade' => 'XII',
+                'major' => 'AKL',
+                'homeroom_teacher' => 'Budi Santoso',
+            ],
+            [
+                'id' => 2,
+                'name' => 'XII TKJ 1',
+                'grade' => 'XII',
+                'major' => 'TKJ',
+                'homeroom_teacher' => 'Siti Aminah',
+            ],
         ];
-        return view ('classes.index', [
-            "title" => $title,
-            "schoolclasses" => $schoolclasses
+
+        return view('classes.index', [
+            'title' => $title,
+            'classes' => $classes,
         ]);
     }
 }

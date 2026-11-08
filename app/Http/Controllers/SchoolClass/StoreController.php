@@ -1,4 +1,5 @@
 <?php
+  
 
 namespace App\Http\Controllers\SchoolClass;
 
@@ -12,6 +13,6 @@ class StoreController extends Controller
      */
     public function __invoke(Request $request)
     {
-        return "Melakukan penambahan data kelas";
+        return "Menambahkan data kelas baru";
     }
 }

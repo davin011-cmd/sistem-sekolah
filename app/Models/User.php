@@ -1,4 +1,5 @@
 <?php
+  
 
 namespace App\Models;
 
@@ -10,23 +11,21 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
-#[Fillable(['name', 'email', 'password'])]
+#[Fillable(['name', 'email', 'password', 'role'])]
 #[Hidden(['password', 'remember_token'])]
 class User extends Authenticatable
 {
-    /** @use HasFactory<UserFactory> */
     use HasFactory, Notifiable;
 
-    /**
-     * Get the attributes that should be cast.
-     *
-     * @return array<string, string>
-     */
-    protected function casts(): array
+    // Pastikan fillable atau guarded sudah diatur
+    protected $guarded = ['id'];
+
+    // Atau pakai fillable:
+    // protected $fillable = ['name', 'email', 'password', 'role'];
+
+    // Relasi ke model Student (jika user berperan sebagai siswa)
+    public function student()
     {
-        return [
-            'email_verified_at' => 'datetime',
-            'password' => 'hashed',
-        ];
+        return $this->hasOne(Student::class);
     }
 }

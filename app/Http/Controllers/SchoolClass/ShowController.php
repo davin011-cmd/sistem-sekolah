@@ -1,4 +1,5 @@
 <?php
+  
 
 namespace App\Http\Controllers\SchoolClass;
 
@@ -7,14 +8,21 @@ use Illuminate\Http\Request;
 
 class ShowController extends Controller
 {
-    /**
-     * Handle the incoming request.
-     */
-    public function __invoke(Request $request)
+    public function __invoke(Request $request, string $id)
     {
         $title = "Sistem Sekolah - Detail Kelas";
-        return view ('classes.show', [
-            "title" => $title
+
+        $class = [
+            'id' => $id,
+            'name' => 'XII AKL 1',
+            'grade' => 'XII',
+            'major' => 'AKL',
+            'homeroom_teacher' => 'Budi Santoso',
+        ];
+
+        return view('classes.show', [
+            'title' => $title,
+            'class' => $class,
         ]);
     }
 }

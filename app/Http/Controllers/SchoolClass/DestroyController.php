@@ -1,4 +1,5 @@
 <?php
+  
 
 namespace App\Http\Controllers\SchoolClass;
 
@@ -10,8 +11,8 @@ class DestroyController extends Controller
     /**
      * Handle the incoming request.
      */
-    public function __invoke(Request $request)
+    public function __invoke(Request $request, string $id)
     {
-        return "Menghapus data kelas";
+        return "Menghapus data kelas dengan ID: {$id}";
     }
 }

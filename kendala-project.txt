@@ -1,0 +1,20 @@
+Catatan Kendala Proyek
+
+1. Seeder, Faker, dan Factory
+Saya menemukan beberapa factory dan seeder belum siap dipakai secara konsisten. UserSeeder hanya membuat satu user, karena count(100) dipanggil setelah create(). SchoolClassFactory juga belum mengembalikan data kelas. StudentFactory membutuhkan data kelas dan jurusan yang sudah ada, jadi StudentSeeder bisa gagal kalau dijalankan sendiri tanpa data prasyarat. Selain itu, belum ada seeder khusus untuk akun guru.
+
+2. Authentication
+Saya melihat proses login dan registrasi sudah tersedia, tetapi registrasi selalu memberikan role student. Jadi, pengguna yang mendaftar sendiri tidak bisa langsung membuka halaman khusus guru. Untuk mengaksesnya, perlu ada akun dengan role teacher yang dibuat atau diubah secara terpisah.
+
+3. Middleware
+Saya menemukan pembatasan role sudah dipasang pada route, tetapi middleware menangani pengguna yang belum login dengan mencetak pesan lalu menghentikan proses menggunakan exit. Cara ini melewati alur respons Laravel yang normal. Karena route memasang middleware role sebelum auth, pengguna yang belum login berisiko mendapat respons yang tidak semestinya, bukan diarahkan ke halaman login.
+
+4. Filter dan Pagination
+Saya menemukan pencarian, filter kelas/jurusan, pagination 10 data, dan pelestarian query saat pindah halaman sudah tersedia. Namun, pilihan filter bergantung pada data yang ada di tabel classes dan majors. Jika tabel tersebut belum diisi, pilihan filternya kosong. Hasilnya juga bergantung pada relasi siswa yang benar ke kelas dan jurusan.
+
+5. Relations Setup
+Saya menemukan tabel kelas, jurusan, siswa, dan pivot mata pelajaran sudah memiliki migrasi serta foreign key. Kendalanya, migrasi lama menghapus kolom class dan major dari students lalu menambahkan class_id dan major_id tanpa memindahkan nilai lama. Jika database sudah berisi data siswa lama, informasi kelas dan jurusannya bisa hilang; penambahan foreign key yang wajib diisi juga perlu disesuaikan dengan data yang sudah ada sebelum migrasi dijalankan.
+
+6. Relationship Method
+Saya menemukan method relasi Eloquent sudah didefinisikan untuk siswa dengan pengguna, kelas, jurusan, dan mata pelajaran. Method ini bekerja jika foreign key dan data terkait valid. Jika data relasi belum ada atau factory/seeder tidak menyiapkannya, proses pembuatan siswa dan tampilan filter dapat gagal atau tidak menampilkan relasi seperti yang diharapkan.
+
